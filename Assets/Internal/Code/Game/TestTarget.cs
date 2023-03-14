@@ -1,18 +1,20 @@
-﻿using UnityEngine;
+﻿using ProjectSystems;
+using UnityEngine;
 
 namespace Game
 {
 	public class TestTarget
 	{
 		public TestTarget(
+			LevelsDataControlSystem levelsDataControlSystem,
 			TargetInfoGenerator targetInfoGenerator
 			)
 		{
-			var level = targetInfoGenerator.GetTargetInfo(0, out int heightTargetInfo, out int weightTargetInfo);
+			var targetInfo = targetInfoGenerator.GenerateTargetInfo(levelsDataControlSystem.GetCurrentLevel().TargetSettings, out int heightTargetInfo, out int weightTargetInfo);
 
 			for (int i = 0; i < heightTargetInfo; i++)
 			{
-				Debug.LogError($"{level[i, 0]} {level[i, 1]} {level[i, 2]} {level[i, 3]} {level[i, 4]} {level[i, 5]} {level[i, 6]} {level[i, 7]} {level[i, 8]} {level[i, 9]} {level[i, 10]}");
+				Debug.LogError($"{targetInfo[i, 0]} {targetInfo[i, 1]} {targetInfo[i, 2]} {targetInfo[i, 3]} {targetInfo[i, 4]} {targetInfo[i, 5]} {targetInfo[i, 6]} {targetInfo[i, 7]} {targetInfo[i, 8]} {targetInfo[i, 9]} {targetInfo[i, 10]}");
 			}
 		}
 	}

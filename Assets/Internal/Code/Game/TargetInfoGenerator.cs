@@ -1,33 +1,25 @@
-﻿using System.Collections.Generic;
-using Settings;
-using UnityEngine;
+﻿using Settings;
 
 namespace Game
 {
 	public class TargetInfoGenerator
 	{
-		private readonly LevelSettings _levelSettings;
-
 		private TargetSettings _targetSettings;
 		
 		private readonly int[,] _targetInfo;
 
 		public TargetInfoGenerator(
-			LevelSettings levelSettings
+			LevelStorage levelStorage
 			)
 		{
-			_levelSettings = levelSettings;
-
-			_targetInfo = new int[levelSettings.GetMaxTargetSize(true), levelSettings.GetMaxTargetSize(false)];
+			_targetInfo = new int[levelStorage.GetMaxTargetSize(true), levelStorage.GetMaxTargetSize(false)];
 		}
 
-		public int[,] GetTargetInfo(int level, out int heightTargetInfo, out int weightTargetInfo)
+		public int[,] GenerateTargetInfo(TargetSettings targetSettings, out int heightTargetInfo, out int weightTargetInfo)
 		{
-			_targetSettings = _levelSettings.GetLevel(level);
-
-			int heightCenterCube = _targetSettings.HeightCenterCube;
-			int weightCenterCube = _targetSettings.WeighCenterCube;
-			int quantityCubesInLevel = _targetSettings.TargetCubes.Length - 1;
+			int heightCenterCube = targetSettings.HeightCenterCube;
+			int weightCenterCube = targetSettings.WeighCenterCube;
+			int quantityCubesInLevel = targetSettings.TargetCubes.Length - 1;
 			
 			heightTargetInfo = quantityCubesInLevel * 2 + heightCenterCube;
 			weightTargetInfo = quantityCubesInLevel * 2 + weightCenterCube;
@@ -62,7 +54,7 @@ namespace Game
 		{
 			for (int i = 0; i < quantityCubeInLine; i++)
 			{
-				var indexCurrentElement = totalQuantityCube - i;
+				int indexCurrentElement = totalQuantityCube - i;
 				
 				_targetInfo[indexLine, i] = indexCurrentElement;
 				_targetInfo[indexLine, (totalQuantityCube * 2) - i + weightCenterCube - 1] = indexCurrentElement;

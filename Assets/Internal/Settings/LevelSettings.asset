@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dfff6ee08f3b4bcb98f31dbc4fb17aed, type: 3}
-  m_Name: New Level Settings
+  m_Name: LevelSettings
   m_EditorClassIdentifier: 
   _targetSettings:
   - _targetCubes:
