@@ -1,27 +1,34 @@
-﻿using Settings;
+﻿using ProjectSystems;
+using Settings;
 
 namespace Game
 {
 	public class TargetInfoGenerator
 	{
+		private readonly LevelsDataControlSystem _levelsDataControlSystem;
 		private TargetSettings _targetSettings;
 		
-		private readonly int[,] _targetInfo;
+		private readonly int[] _targetInfos;
 
 		public TargetInfoGenerator(
-			LevelStorage levelStorage
+			LevelsDataControlSystem levelsDataControlSystem
 			)
 		{
-			_targetInfo = new int[levelStorage.GetMaxTargetSize(true), levelStorage.GetMaxTargetSize(false)];
+			_levelsDataControlSystem = levelsDataControlSystem;
+			
+			_targetInfos = new int[levelsDataControlSystem.GetMaxTargetSize(true) * levelsDataControlSystem.GetMaxTargetSize(false)];
 		}
 
-		public int[,] GenerateTargetInfo(TargetSettings targetSettings, out int heightTargetInfo, out int weightTargetInfo)
+		public int[] GenerateTargetInfo(out int weightTargetInfo)
 		{
+			ClearTargetInfo();
+			
+			var targetSettings = _levelsDataControlSystem.GetCurrentLevel().TargetSettings;
+			
 			int heightCenterCube = targetSettings.HeightCenterCube;
 			int weightCenterCube = targetSettings.WeighCenterCube;
 			int quantityCubesInLevel = targetSettings.TargetCubes.Length - 1;
 			
-			heightTargetInfo = quantityCubesInLevel * 2 + heightCenterCube;
 			weightTargetInfo = quantityCubesInLevel * 2 + weightCenterCube;
 			
 			int quantityCubesInLine = 1;
@@ -47,23 +54,31 @@ namespace Game
 				FillLine(i, quantityCubesInLine, quantityCubesInLevel, weightCenterCube);
 			}
 			
-			return _targetInfo;
+			return _targetInfos;
 		}
 
 		private void FillLine(int indexLine, int quantityCubeInLine, int totalQuantityCube, int weightCenterCube)
 		{
+			int indexStart = ((totalQuantityCube * 2) + weightCenterCube) * indexLine;
+			
 			for (int i = 0; i < quantityCubeInLine; i++)
 			{
 				int indexCurrentElement = totalQuantityCube - i;
 				
-				_targetInfo[indexLine, i] = indexCurrentElement;
-				_targetInfo[indexLine, (totalQuantityCube * 2) - i + weightCenterCube - 1] = indexCurrentElement;
+				_targetInfos[indexStart + i] = indexCurrentElement;
+				_targetInfos[indexStart + (totalQuantityCube * 2) - i + weightCenterCube - 1] = indexCurrentElement;
 			}
 
 			for (int i = quantityCubeInLine; i < (totalQuantityCube * 2) - quantityCubeInLine + weightCenterCube; i++)
 			{
-				_targetInfo[indexLine, i] = totalQuantityCube - quantityCubeInLine + 1;
+				_targetInfos[indexStart + i] = totalQuantityCube - quantityCubeInLine + 1;
 			}
+		}
+
+		private void ClearTargetInfo()
+		{
+			for (var index = 0; index < _targetInfos.Length; index++)
+				_targetInfos[index] = -1;
 		}
 	}
 }

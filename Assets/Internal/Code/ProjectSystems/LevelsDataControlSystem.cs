@@ -15,11 +15,38 @@ namespace ProjectSystems
 		}
 		
 		public LevelStorage.Level GetCurrentLevel() =>
-			_levelStorage.GetLevel(_indexLevel);
+			GetLevel(_indexLevel);
 
+		public int GetMaxTargetSize(bool height)
+		{
+			int maxSize = 0;
+			
+			foreach (LevelStorage.Level level in _levelStorage.Levels)
+			{
+				TargetSettings targetSettings = level.TargetSettings;
+				
+				int currentSize = (height ? targetSettings.HeightCenterCube : targetSettings.WeighCenterCube) +
+				                  ((targetSettings.TargetCubes.Length - 1) * 2);
+				
+				if (maxSize < currentSize)
+					maxSize = currentSize;
+			}
+
+			return maxSize;
+		}
+		
 		private void NextLevel()
 		{
 			_indexLevel++;
+		}
+		
+		private LevelStorage.Level GetLevel(int indexLevel)
+		{
+			var levels = _levelStorage.Levels;
+			
+			return indexLevel > levels.Length - 1
+				? levels[^1]
+				: levels[indexLevel];
 		}
 	}
 }

@@ -1,5 +1,7 @@
 ﻿using Game;
 using Game.Misc;
+using InputSystem;
+using ProjectSystems;
 using Settings;
 using Tools.WTools;
 using UnityEngine;
@@ -10,18 +12,21 @@ namespace Installers
 	public class ProjectInstaller : MonoInstaller
 	{
 		[SerializeField] private StorageOfResourcesCollection _storageOfResourcesCollection;
-		[SerializeField] private LevelSettings _levelSettings;
+		[SerializeField] private LevelStorage _levelStorage;
 		
 		public override void InstallBindings()
 		{
 			NonLazyInstall();
 			CommonInstall();
+			SignalBusInstaller.Install(Container);
+			SignalInstaller.Install(Container);
+			InputSystemInstaller.Install(Container);
 		}
 
 		private void NonLazyInstall()
 		{
 			Container.BindInterfacesTo<Arm>().AsSingle().NonLazy();
-			Container.Bind<TestTarget>().AsSingle().NonLazy();
+			Container.Bind<LevelsDataControlSystem>().AsSingle().NonLazy();
 		}
 
 		private void CommonInstall()
@@ -31,7 +36,7 @@ namespace Installers
 			Container.Bind<ObjectInjector>().AsSingle();
 			Container.Bind<PoolStorage>().AsSingle();
 			Container.BindInstance(_storageOfResourcesCollection).AsSingle();
-			Container.BindInstance(_levelSettings).AsSingle();
+			Container.BindInstance(_levelStorage).AsSingle();
 		}
 	}
 }

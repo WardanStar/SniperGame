@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2638ff7046b848ab9d7442067383d078, type: 3}
   m_Name: StorageOfResourcesCollection
   m_EditorClassIdentifier: 
-  _storageObjectDataInResources: []
+  _storageObjectDataInResources:
+  - idCollection: Cubes
+    _resourcesList: {fileID: 11400000, guid: f77ff7814e4fa5844a81460267e62e12, type: 2}
