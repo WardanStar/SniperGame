@@ -9,6 +9,7 @@ namespace Installers
 		{
 			Container.DeclareSignal<PreparationGameSignal>();
 			Container.DeclareSignal<StartGameSignal>();
+			Container.DeclareSignal<CameraSetPositionSignal>();
 		}
 	}
 }

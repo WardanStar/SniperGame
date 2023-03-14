@@ -7,14 +7,19 @@ namespace InputSystem
 	{
 		public IReadOnlyReactiveProperty<bool> OnStartAiming => _onStartAiming;
 		public IReadOnlyReactiveProperty<bool> OnEndAiming => _onEndAiming;
+		public Vector3 MoveDirection => _moveDirection;
 
 		private readonly ReactiveProperty<bool> _onStartAiming = new();
 		private readonly ReactiveProperty<bool> _onEndAiming = new();
+		private Vector3 _moveDirection;
+		private Vector3 _mousePosition;
 		
 		public void Tick()
 		{
-			_onStartAiming.Value = Input.GetMouseButton(1);
-			_onEndAiming.Value = Input.GetMouseButtonUp(1);
+			_onStartAiming.Value = Input.GetMouseButtonUp(1);
+			_onEndAiming.Value = Input.GetMouseButtonDown(1);
+			_moveDirection = new Vector3(_mousePosition.x - Input.mousePosition.x, _mousePosition.y - Input.mousePosition.y, 0f);
+			_mousePosition = Input.mousePosition;
 		}
 	}
 }

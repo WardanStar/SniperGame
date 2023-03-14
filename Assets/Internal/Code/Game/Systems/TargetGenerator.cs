@@ -1,4 +1,6 @@
-﻿using Game.Data;
+﻿using Additional;
+using Game.Data;
+using Game.Entities;
 using ProjectSystems;
 using Settings;
 using Signals;
@@ -12,6 +14,7 @@ namespace Game
 	public class TargetGenerator : IInitializable
 	{
 		private readonly IArm _arm;
+		private readonly ILoader _loader;
 		private readonly SceneResourcesStorage _sceneResourcesStorage;
 		private readonly TargetInfoGenerator _targetInfoGenerator;
 		private readonly LevelsDataControlSystem _levelsDataControlSystem;
@@ -20,6 +23,7 @@ namespace Game
 
 		public TargetGenerator(
 			IArm arm,
+			ILoader loader,
 			SceneResourcesStorage sceneResourcesStorage,
 			TargetInfoGenerator targetInfoGenerator,
 			LevelsDataControlSystem levelsDataControlSystem,
@@ -27,6 +31,7 @@ namespace Game
 			)
 		{
 			_arm = arm;
+			_loader = loader;
 			_sceneResourcesStorage = sceneResourcesStorage;
 			_targetInfoGenerator = targetInfoGenerator;
 			_levelsDataControlSystem = levelsDataControlSystem;
@@ -42,17 +47,17 @@ namespace Game
 		{
 			LevelStorage.Level currentLevel = _levelsDataControlSystem.GetCurrentLevel();
 			
-			TargetSettings targetSettings = currentLevel.TargetSettings;
+			LevelStorage.TargetSettings targetSettings = currentLevel.TargetSettings;
 
 			Vector3 targetSpawnPoint = _sceneResourcesStorage.TargetSpawnPoint.position;
 
 			Vector3 startPoint = new Vector3(
-				targetSpawnPoint.x - (targetSettings.TargetCubes.Length - 1) +
-				(targetSettings.WeighCenterCube * 0.5f) -
-				(Mathf.Approximately(targetSettings.WeighCenterCube % 2, 0)
-					? 0 : 0.5f),
+				targetSpawnPoint.x - 
+				targetSettings.TargetCubes.Length + 1 + 
+				currentLevel.SizeTargetElement * 0.5f -
+				targetSettings.WeighCenterCube * 0.5f,
 
-				targetSpawnPoint.y + 0.5f,
+				targetSpawnPoint.y + currentLevel.SizeTargetElement * 0.5f,
 
 				targetSpawnPoint.z);
 
@@ -66,7 +71,17 @@ namespace Game
 				if (targetInfo == -1)
 					return;
 				
-				_arm.PoolObjectGetter.GetPoolObject($"Cubes", targetSettings.TargetCubes[targetInfo].PathToCube, nextPosition, Quaternion.identity);
+				var cubeElement = 
+					_arm.PoolObjectGetter.GetComponentFromPoolObject<TargetCubeElementMono>
+						(ConstantKeys.TARGET_CUBE_ELEMENT_COLLECTION_ID, ConstantKeys.TARGET_CUBE_ELEMENT_ID, nextPosition, Quaternion.identity);
+
+				LevelStorage.TargetSettings.TargetCube cubeSettings = targetSettings.TargetCubes[targetInfo];
+				
+				cubeElement.SetMaterials(_loader.LoadObject<Material>(
+					ConstantKeys.TARGET_CUBE_ELEMENT_MATERIALS_COLLECTION_ID, cubeSettings.PathToCube));
+				
+				cubeElement.SetQuantityScore(cubeSettings.QuantityScoreForDestroyingCube);
+				
 				nextPosition = new Vector3(nextPosition.x + 1, nextPosition.y, nextPosition.z);
 				quantityElementInLine++;
 

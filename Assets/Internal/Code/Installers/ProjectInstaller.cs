@@ -13,6 +13,8 @@ namespace Installers
 	{
 		[SerializeField] private StorageOfResourcesCollection _storageOfResourcesCollection;
 		[SerializeField] private LevelStorage _levelStorage;
+		[SerializeField] private WeaponStorage _weaponStorage;
+		[SerializeField] private GameSettings _gameSettings;
 		
 		public override void InstallBindings()
 		{
@@ -27,6 +29,7 @@ namespace Installers
 		{
 			Container.BindInterfacesTo<Arm>().AsSingle().NonLazy();
 			Container.Bind<LevelsDataControlSystem>().AsSingle().NonLazy();
+			Container.Bind<WeaponControlSystem>().AsSingle().NonLazy();
 		}
 
 		private void CommonInstall()
@@ -37,6 +40,8 @@ namespace Installers
 			Container.Bind<PoolStorage>().AsSingle();
 			Container.BindInstance(_storageOfResourcesCollection).AsSingle();
 			Container.BindInstance(_levelStorage).AsSingle();
+			Container.BindInstance(_weaponStorage).AsSingle();
+			Container.BindInstance(_gameSettings).AsSingle();
 		}
 	}
 }

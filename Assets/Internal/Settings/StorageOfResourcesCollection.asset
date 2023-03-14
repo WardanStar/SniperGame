@@ -13,5 +13,9 @@ MonoBehaviour:
   m_Name: StorageOfResourcesCollection
   m_EditorClassIdentifier: 
   _storageObjectDataInResources:
-  - idCollection: Cubes
+  - idCollection: TargetCubeElementCollection
     _resourcesList: {fileID: 11400000, guid: f77ff7814e4fa5844a81460267e62e12, type: 2}
+  - idCollection: TargetCubeElementMaterialsCollection
+    _resourcesList: {fileID: 11400000, guid: 39d70dea5a7f9e5478e008793f44141a, type: 2}
+  - idCollection: BulletsCollection
+    _resourcesList: {fileID: 11400000, guid: 9d9b9a3fef2834342ad556c917e57087, type: 2}

@@ -6,7 +6,7 @@ namespace Game
 	public class TargetInfoGenerator
 	{
 		private readonly LevelsDataControlSystem _levelsDataControlSystem;
-		private TargetSettings _targetSettings;
+		private LevelStorage.TargetSettings _targetSettings;
 		
 		private readonly int[] _targetInfos;
 

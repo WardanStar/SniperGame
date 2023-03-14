@@ -23,7 +23,7 @@ namespace ProjectSystems
 			
 			foreach (LevelStorage.Level level in _levelStorage.Levels)
 			{
-				TargetSettings targetSettings = level.TargetSettings;
+				LevelStorage.TargetSettings targetSettings = level.TargetSettings;
 				
 				int currentSize = (height ? targetSettings.HeightCenterCube : targetSettings.WeighCenterCube) +
 				                  ((targetSettings.TargetCubes.Length - 1) * 2);

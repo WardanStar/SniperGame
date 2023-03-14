@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c9b807db5094553b2e7aa0fd9869340, type: 3}
+  m_Name: WeaponStorage
+  m_EditorClassIdentifier: 
+  _weapons:
+  - _id: SniperRifle
+    _shootingMode: 0
+    _ammunition: 3
+    _speedAiming: 0
+    _scoringRatio: 0.5
+  - _id: SniperRifleElite
+    _shootingMode: 0
+    _ammunition: 2
+    _speedAiming: 1
+    _scoringRatio: 1
+  - _id: Shotgun
+    _shootingMode: 1
+    _ammunition: 3
+    _speedAiming: 0
+    _scoringRatio: 0.1
+  - _id: ShotgunElite
+    _shootingMode: 0
+    _ammunition: 2
+    _speedAiming: 1
+    _scoringRatio: 0.2

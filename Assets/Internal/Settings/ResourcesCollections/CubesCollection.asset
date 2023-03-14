@@ -13,11 +13,5 @@ MonoBehaviour:
   m_Name: CubesCollection
   m_EditorClassIdentifier: 
   _storageObjectDataInResources:
-  - _idObject: YellowCube
-    _pathToResources: Prefabs/YellowCube
-  - _idObject: RedCube
-    _pathToResources: Prefabs/RedCube
-  - _idObject: BlueCube
-    _pathToResources: Prefabs/BlueCube
-  - _idObject: WhiteCube
-    _pathToResources: Prefabs/WhiteCube
+  - _idObject: TargetCubeElement
+    _pathToResources: Prefabs/TargetCubeElement

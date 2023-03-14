@@ -1,4 +1,5 @@
 ﻿using Game;
+using Game.CameraStateMachine;
 using Game.Data;
 using Game.Misc;
 using UnityEngine;
@@ -18,7 +19,9 @@ namespace Installers
 
 		private void NonLazyInstall()
 		{
-			Container.BindInterfacesAndSelfTo<TargetGenerator>().AsSingle().NonLazy();
+			Container.BindInterfacesTo<TargetGenerator>().AsSingle().NonLazy();
+			Container.BindInterfacesTo<CameraControlSystems>().AsSingle().NonLazy();
+			Container.BindInterfacesAndSelfTo<CameraStateMachine>().AsSingle().NonLazy();
 			Container.Bind<LevelStarter>().AsSingle().NonLazy();
 		}
 		
