@@ -16,21 +16,38 @@ namespace Game.CameraStateMachine
 			IJoystick joystick,
 			SceneResourcesStorage sceneResourcesStorage,
 			GameSettings gameSettings,
-			WeaponControlSystem weaponControlSystem
+			WeaponControlSystem weaponControlSystem,
+			UIFormControlSystem uiFormControlSystem
 			)
 		{
+			LookAtBulletDataContainer lookAtBulletContainer = new LookAtBulletDataContainer();
+			
+			SetDataContainers(new Dictionary<Type, object>()
+			{
+				{typeof(LookAtBulletDataContainer), lookAtBulletContainer}
+			});
+			
 			SetStates(new Dictionary<Type, State<ICameraState>>()
 			{
 				{typeof(IdleCameraState), new IdleCameraState(this)},
 				
 				{typeof(AimingCameraState), new AimingCameraState(this,
-					joystick, sceneResourcesStorage.Camera,
-					gameSettings.SpeedCameraRotation * weaponControlSystem.GetSpeedAiming())},
+					joystick, weaponControlSystem,
+					uiFormControlSystem,
+					sceneResourcesStorage.Camera.transform, 
+					gameSettings.SpeedCameraRotation)},
 				
-				{typeof(LookAtBulletCameraState), new LookAtBulletCameraState(this)},
+				{typeof(LookAtBulletCameraState), new LookAtBulletCameraState(this,
+					lookAtBulletContainer,
+					sceneResourcesStorage.Camera.transform,
+					gameSettings.IndentCameraWithBullet,
+					gameSettings.CameraMovementTimeToTheTarget,
+					gameSettings.MAXCameraSpeed)},
 				
 				{typeof(LookAtResultCameraState), new LookAtResultCameraState(this)},
 			});
+			
+			SetState<IdleCameraState>();
 		}
 	}
 }

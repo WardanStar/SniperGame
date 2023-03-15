@@ -9,5 +9,6 @@ namespace InputSystem
 		public IReadOnlyReactiveProperty<bool> OnStartAiming { get; }
 		public IReadOnlyReactiveProperty<bool> OnEndAiming { get; }
 		public Vector3 MoveDirection { get; }
+		public void ChangeActive(bool isActive);
 	}
 }

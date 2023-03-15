@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _storageObjectDataInResources:
   - _idObject: DefaultBullet
-    _pathToResources: 
+    _pathToResources: Prefabs/DefaultBullet

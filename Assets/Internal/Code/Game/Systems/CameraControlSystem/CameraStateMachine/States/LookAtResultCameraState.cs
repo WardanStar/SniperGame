@@ -4,7 +4,9 @@ namespace Game.CameraStateMachine
 {
 	public class LookAtResultCameraState : State<ICameraState>
 	{
-		public LookAtResultCameraState(StateMachine<ICameraState> stateMachine) : base(stateMachine)
+		public LookAtResultCameraState(
+			StateMachine<ICameraState> stateMachine
+			) : base(stateMachine)
 		{
 		}
 	}

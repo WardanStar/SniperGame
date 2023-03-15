@@ -14,3 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _defaultWeaponID: 0
   _speedCameraRotation: 5
+  _indentCameraWithBullet: {x: -2, y: 2, z: 2}
+  _cameraMovementTimeToTheTarget: 1
+  _maxCameraSpeed: 100

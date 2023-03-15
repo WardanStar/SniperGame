@@ -1,50 +1,55 @@
 ﻿using Game.Data;
-using Game.Misc;
 using InputSystem;
-using ProjectSystems;
 using Signals;
+using Tools.DTools;
+using Tools.WTools;
 using UniRx;
 using UnityEngine;
 using Zenject;
 
 namespace Game
 {
-	public class LevelStarter
+	public class LevelStarter : IInitializable
 	{
+		private readonly IArm _arm;
+		private readonly IJoystick _joystick;
 		private readonly SignalBus _signalBus;
-		private readonly LevelsDataControlSystem _levelsDataControlSystem;
+		private readonly ContextDisposable _contextDisposable;
 		private readonly SceneResourcesStorage _sceneResourcesStorage;
 
 		public LevelStarter(
+			IArm arm,
 			IJoystick joystick,
 			SignalBus signalBus,
-			LevelsDataControlSystem levelsDataControlSystem,
 			SceneResourcesStorage sceneResourcesStorage,
 			ContextDisposable contextDisposable
 			)
 		{
+			_arm = arm;
+			_joystick = joystick;
 			_signalBus = signalBus;
-			_levelsDataControlSystem = levelsDataControlSystem;
 			_sceneResourcesStorage = sceneResourcesStorage;
-			joystick.OnStartAiming.Where(isStart => isStart).Subscribe(_ => StartGame()).AddTo(contextDisposable);
+			_contextDisposable = contextDisposable;
 		}
 
+		public void Initialize()
+		{
+			_signalBus.GetStream<PlayGameSignal>().Subscribe(signal => StartGame()).AddTo(_contextDisposable);
+		}
+		
 		private void StartGame()
 		{
-			var currentLevel = _levelsDataControlSystem.GetCurrentLevel();
-			var targetSettings = currentLevel.TargetSettings;
+			_arm.InitializeRoot();
 			
 			_signalBus.Fire<PreparationGameSignal>();
 
-			Vector3 sniperPosition = 
-				_sceneResourcesStorage.TargetSpawnPoint.position - 
-				(currentLevel.DistanceToTarget * Vector3.forward) + 
-				((targetSettings.TargetCubes.Length - 1 + 
-				  targetSettings.WeighCenterCube * 0.5f) * Vector3.up);
-
-			_signalBus.Fire(new CameraSetPositionSignal(){ Position = sniperPosition });
-
 			Cursor.visible = false;
+			
+			_signalBus.Fire<StartGameSignal>();
+			
+			_joystick.ChangeActive(true);
 		}
+
+		
 	}
 }

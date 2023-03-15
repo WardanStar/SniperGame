@@ -1,7 +1,7 @@
 ﻿using Game;
-using Game.Misc;
 using InputSystem;
 using ProjectSystems;
+using Save;
 using Settings;
 using Tools.WTools;
 using UnityEngine;
@@ -23,20 +23,22 @@ namespace Installers
 			SignalBusInstaller.Install(Container);
 			SignalInstaller.Install(Container);
 			InputSystemInstaller.Install(Container);
+			UIFormSystemInstaller.Install(Container);
+			SaveSystemInstaller.Install(Container);
 		}
 
 		private void NonLazyInstall()
 		{
 			Container.BindInterfacesTo<Arm>().AsSingle().NonLazy();
+			Container.BindInterfacesTo<SaveDataControlSystem>().AsSingle().NonLazy();
 			Container.Bind<LevelsDataControlSystem>().AsSingle().NonLazy();
-			Container.Bind<WeaponControlSystem>().AsSingle().NonLazy();
+			Container.Bind<QueueLoadingGame>().AsSingle().NonLazy();
 		}
 
 		private void CommonInstall()
 		{
 			Container.Bind<TargetInfoGenerator>().AsSingle();
 			Container.BindInterfacesTo<ResourcesLoader>().AsSingle();
-			Container.Bind<ObjectInjector>().AsSingle();
 			Container.Bind<PoolStorage>().AsSingle();
 			Container.BindInstance(_storageOfResourcesCollection).AsSingle();
 			Container.BindInstance(_levelStorage).AsSingle();

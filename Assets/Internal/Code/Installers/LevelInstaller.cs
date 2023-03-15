@@ -1,7 +1,8 @@
 ﻿using Game;
 using Game.CameraStateMachine;
 using Game.Data;
-using Game.Misc;
+using ProjectSystems;
+using Tools.DTools;
 using UnityEngine;
 using Zenject;
 
@@ -22,7 +23,8 @@ namespace Installers
 			Container.BindInterfacesTo<TargetGenerator>().AsSingle().NonLazy();
 			Container.BindInterfacesTo<CameraControlSystems>().AsSingle().NonLazy();
 			Container.BindInterfacesAndSelfTo<CameraStateMachine>().AsSingle().NonLazy();
-			Container.Bind<LevelStarter>().AsSingle().NonLazy();
+			Container.BindInterfacesAndSelfTo<WeaponControlSystem>().AsSingle().NonLazy();
+			Container.BindInterfacesAndSelfTo<LevelStarter>().AsSingle().NonLazy();
 		}
 		
 		private void CommonInstall()

@@ -1,5 +1,4 @@
 ﻿using System;
-using Game.Misc;
 using UniRx;
 using UnityEngine;
 using Zenject;
@@ -14,7 +13,6 @@ namespace Tools.WTools
 		public UIPoolObjectGetter UIPoolObjectGetter => _uiPoolObjectGetter;
 		public ObjectGetter ObjectGetter => _objectGetter;
 
-		private readonly ObjectInjector _objectInjector;
 		private readonly PoolStorage _poolStorage;
 		private readonly ILoader _loader;
 		private readonly DiContainer _container;
@@ -27,13 +25,11 @@ namespace Tools.WTools
 		private Transform _poolRoot;
 
 		public Arm(
-			ObjectInjector objectInjector,
 			PoolStorage poolStorage,
 			ILoader loader,
 			DiContainer container
 			)
 		{
-			_objectInjector = objectInjector;
 			_poolStorage = poolStorage;
 			_loader = loader;
 			_container = container;
@@ -90,7 +86,7 @@ namespace Tools.WTools
 
 				poolObject = isInject ?
 					_container.InstantiatePrefabForComponent<PoolObjectBase>(loadObj) :
-					Object.Instantiate(loadObj, position, rotation, parent ?? _poolRoot);
+					Object.Instantiate(loadObj, position, rotation);
 				
 				pool.AddPoolObject(poolObject);
 			}
@@ -98,7 +94,7 @@ namespace Tools.WTools
 			if (!warmUpObject)
 				poolObject.Using();
 			
-			PreparationPoolObject(idObject, poolObject, position, rotation, parent, isNewObject, isRepeatedInject, isActive);
+			PreparationPoolObject(idObject, poolObject, position, rotation, parent ?? _poolRoot, isNewObject, isRepeatedInject, isActive);
 			
 			return poolObject;
 		}
@@ -162,9 +158,9 @@ namespace Tools.WTools
 
 			ILockedMonoBehaviour lockedMonoBehaviour = isInject
 				? _container.InstantiatePrefabForComponent<ILockedMonoBehaviour>(loadObj)
-				: Object.Instantiate(loadObj, position, rotation, parent ?? _poolRoot);
+				: Object.Instantiate(loadObj, position, rotation);
 			
-			PreparationLockedMonoBehaviour(lockedMonoBehaviour, position, rotation, parent, true, isRepeatedInject, isActive);
+			PreparationLockedMonoBehaviour(lockedMonoBehaviour, position, rotation, parent ?? _poolRoot, true, isRepeatedInject, isActive);
 
 			return lockedMonoBehaviour;
 		}
@@ -192,7 +188,7 @@ namespace Tools.WTools
 			lockedMonoBehaviour.ChangeActive(isActive);
 
 			if (isRepeatedInject && !isNewObject)
-				_objectInjector.InjectGO(lockedMonoBehaviour.GetGameObject);
+				_container.InjectGameObject(lockedMonoBehaviour.GetGameObject);
 			
 			if (!ReferenceEquals(parent, null))
 				lockedMonoBehaviour.SetParent(parent);

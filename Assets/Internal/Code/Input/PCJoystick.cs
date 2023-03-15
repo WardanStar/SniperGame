@@ -13,11 +13,18 @@ namespace InputSystem
 		private readonly ReactiveProperty<bool> _onEndAiming = new();
 		private Vector3 _moveDirection;
 		private Vector3 _mousePosition;
+		private bool _isActive;
+		
+		public void ChangeActive(bool isActive) =>
+			_isActive = isActive;
 		
 		public void Tick()
 		{
-			_onStartAiming.Value = Input.GetMouseButtonUp(1);
-			_onEndAiming.Value = Input.GetMouseButtonDown(1);
+			if (!_isActive)
+				return;
+			
+			_onStartAiming.Value = Input.GetMouseButtonDown(1);
+			_onEndAiming.Value = Input.GetMouseButtonUp(1);
 			_moveDirection = new Vector3(_mousePosition.x - Input.mousePosition.x, _mousePosition.y - Input.mousePosition.y, 0f);
 			_mousePosition = Input.mousePosition;
 		}

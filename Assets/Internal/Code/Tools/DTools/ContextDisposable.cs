@@ -3,7 +3,7 @@ using UniRx;
 using UnityEngine;
 using Zenject;
 
-namespace Game.Misc
+namespace Tools.DTools
 {
 	public class ContextDisposable : IDisposable
 	{
