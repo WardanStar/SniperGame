@@ -19,3 +19,5 @@ MonoBehaviour:
     _resourcesList: {fileID: 11400000, guid: 39d70dea5a7f9e5478e008793f44141a, type: 2}
   - idCollection: BulletsCollection
     _resourcesList: {fileID: 11400000, guid: 9d9b9a3fef2834342ad556c917e57087, type: 2}
+  - idCollection: UICollection
+    _resourcesList: {fileID: 11400000, guid: c1d7fed4172d81443a0f832ccc666ca5, type: 2}

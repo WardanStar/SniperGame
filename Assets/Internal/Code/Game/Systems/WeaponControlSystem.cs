@@ -89,7 +89,8 @@ namespace ProjectSystems
 					 (((float)_levelsDataControlSystem.GetCurrentLevel().SizeTargetElement / 2) - bullet.GetTransform().localScale.x)),
 					cameraTransform.rotation);
 			}
-			
+
+			_ammunition.Value--;
 			_signalBus.Fire(new ShootSignal(){BulletTransform = bullet.GetTransform()});
 		}
 		

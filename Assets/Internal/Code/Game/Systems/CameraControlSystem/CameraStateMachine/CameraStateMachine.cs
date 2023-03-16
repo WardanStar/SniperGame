@@ -43,7 +43,10 @@ namespace Game.CameraStateMachine
 					joystick, weaponControlSystem,
 					uiFormControlSystem,
 					sceneResourcesStorage.Camera.transform, 
-					gameSettings.SpeedCameraRotation)
+					gameSettings.SpeedCameraRotation,
+					gameSettings.MINValueBias, gameSettings.MAXValueBias,
+					gameSettings.MINTimeBias, gameSettings.MAXTimeBias,
+					gameSettings.SpeedBias)
 				},
 				
 				{typeof(LookAtBulletCameraState), new LookAtBulletCameraState(this,

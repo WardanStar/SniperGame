@@ -25,3 +25,8 @@ MonoBehaviour:
   _timeToCameraLookResult: 2
   _speedMoveReturnCameraOnStartPosition: 40
   _speedRotateCameraOnStartRotation: 15
+  _minValueBias: -180
+  _maxValueBias: 180
+  _minTimeBias: 0.1
+  _maxTimeBias: 0.5
+  _speedBias: 2

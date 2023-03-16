@@ -25,5 +25,61 @@ MonoBehaviour:
         _quantityScoreForDestroyingCube: 70
       _heightCenterCube: 1
       _weighCenterCube: 1
-    _distanceToTarget: 60
     _sizeTargetElement: 1
+    _distanceToTarget: 60
+  - _targetSettings:
+      _targetCubes:
+      - _pathToCube: 0
+        _quantityScoreForDestroyingCube: 100
+      - _pathToCube: 1
+        _quantityScoreForDestroyingCube: 90
+      - _pathToCube: 2
+        _quantityScoreForDestroyingCube: 80
+      - _pathToCube: 3
+        _quantityScoreForDestroyingCube: 70
+      _heightCenterCube: 1
+      _weighCenterCube: 1
+    _sizeTargetElement: 1
+    _distanceToTarget: 70
+  - _targetSettings:
+      _targetCubes:
+      - _pathToCube: 0
+        _quantityScoreForDestroyingCube: 100
+      - _pathToCube: 1
+        _quantityScoreForDestroyingCube: 90
+      - _pathToCube: 2
+        _quantityScoreForDestroyingCube: 80
+      - _pathToCube: 3
+        _quantityScoreForDestroyingCube: 70
+      _heightCenterCube: 1
+      _weighCenterCube: 1
+    _sizeTargetElement: 1
+    _distanceToTarget: 80
+  - _targetSettings:
+      _targetCubes:
+      - _pathToCube: 0
+        _quantityScoreForDestroyingCube: 100
+      - _pathToCube: 1
+        _quantityScoreForDestroyingCube: 90
+      - _pathToCube: 2
+        _quantityScoreForDestroyingCube: 80
+      - _pathToCube: 3
+        _quantityScoreForDestroyingCube: 70
+      _heightCenterCube: 1
+      _weighCenterCube: 1
+    _sizeTargetElement: 1
+    _distanceToTarget: 90
+  - _targetSettings:
+      _targetCubes:
+      - _pathToCube: 0
+        _quantityScoreForDestroyingCube: 100
+      - _pathToCube: 1
+        _quantityScoreForDestroyingCube: 90
+      - _pathToCube: 2
+        _quantityScoreForDestroyingCube: 80
+      - _pathToCube: 3
+        _quantityScoreForDestroyingCube: 70
+      _heightCenterCube: 1
+      _weighCenterCube: 1
+    _sizeTargetElement: 1
+    _distanceToTarget: 100

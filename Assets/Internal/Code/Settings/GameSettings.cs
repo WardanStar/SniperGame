@@ -24,6 +24,12 @@ namespace Settings
 		public float SpeedMoveReturnCameraOnStartPosition => _speedMoveReturnCameraOnStartPosition;
 		public float SpeedRotateCameraOnStartRotation => _speedRotateCameraOnStartRotation;
 
+		public float MINValueBias => _minValueBias;
+		public float MAXValueBias => _maxValueBias;
+		public float MINTimeBias => _minTimeBias;
+		public float MAXTimeBias => _maxTimeBias;
+		public float SpeedBias => _speedBias;
+
 		[Header("GameSettings")]
 		[SerializeField] private int _quantityScoreOnVictory;
 		
@@ -46,8 +52,15 @@ namespace Settings
 		[SerializeField] private float _timeToCameraLookResult;
 		[SerializeField] private float _speedMoveReturnCameraOnStartPosition;
 		[SerializeField] private float _speedRotateCameraOnStartRotation;
-		
-		
-		
+
+		[Header("CameraBiasSettings")]
+		[SerializeField] private float _minValueBias;
+		[SerializeField] private float _maxValueBias;
+		[SerializeField] private float _minTimeBias;
+		[SerializeField] private float _maxTimeBias;
+		[SerializeField] private float _speedBias;
+
+
+
 	}
 }
