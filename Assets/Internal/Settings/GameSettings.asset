@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: GameSettings
   m_EditorClassIdentifier: 
   _quantityScoreOnVictory: 100
-  _defaultWeaponID: 2
+  _defaultWeaponID: 0
   _repulsiveForceAtCollision: 800
   _bulletSpeed: 15
+  _shootingDistanceFromTheCamera: 0
   _speedCameraRotation: 5
   _indentCameraWithBullet: {x: -2, y: 2, z: 2}
   _cameraMovementTimeToTheTarget: 1

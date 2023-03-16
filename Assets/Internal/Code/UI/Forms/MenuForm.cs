@@ -1,4 +1,5 @@
-﻿using ProjectSystems;
+﻿using Cysharp.Threading.Tasks;
+using ProjectSystems;
 using TMPro;
 using Tools.WTools;
 using UnityEngine;
@@ -22,6 +23,7 @@ namespace UI.Forms
 		{
 			_levelsDataControlSystem = levelsDataControlSystem;
 			_playGame.onClick.AddListener(projectStateMachine.SetState<GameProjectState>);
+			_changeWeaponButton.onClick.AddListener(() => CurrentUIFormControlSystem.ShowForm<ChangeWeaponForm>(true, 0.7f).Forget());
 		}
 
 		public override void ActionBeforeShow()

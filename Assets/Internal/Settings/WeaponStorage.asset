@@ -16,20 +16,20 @@ MonoBehaviour:
   - _id: SniperRifle
     _ammunition: 3
     _quantityBulletAtShot: 1
-    _speedAiming: 0
+    _sightShiftSpeedWhenAiming: 1
     _scoringRatio: 0.5
   - _id: SniperRifleElite
     _ammunition: 2
     _quantityBulletAtShot: 1
-    _speedAiming: 1
+    _sightShiftSpeedWhenAiming: 2
     _scoringRatio: 1
   - _id: Shotgun
     _ammunition: 3
     _quantityBulletAtShot: 5
-    _speedAiming: 0
+    _sightShiftSpeedWhenAiming: 1
     _scoringRatio: 0.1
   - _id: ShotgunElite
     _ammunition: 2
     _quantityBulletAtShot: 5
-    _speedAiming: 1
+    _sightShiftSpeedWhenAiming: 2
     _scoringRatio: 0.2

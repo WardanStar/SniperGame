@@ -54,6 +54,8 @@ namespace Tools.WTools
 			
 			if (isAnimationShow)
 			{
+				currentForm.SetAnimationDuration(animationDuration);
+				
 				if (waitToTheAnimationTheEnd)
 					await AnimationForm(currentForm, typeFormAnimation, true, animationDuration);
 				else

@@ -71,21 +71,6 @@ namespace ProjectSystems
 		public WeaponStorage.Weapon GetCurrentWeapon() =>
 			_currentWeapon;
 		
-		public float GetSpeedAiming()
-		{
-			//TODO
-			
-			switch (_currentWeapon.SpeedAiming)
-			{
-				case WeaponStorage.SpeedAiming.First:
-					return 1f;
-				case WeaponStorage.SpeedAiming.Second:
-					return 2f;
-				default:
-					throw new ArgumentOutOfRangeException();
-			}
-		}
-
 		private void Shoot()
 		{
 			if (!_preparationToShoot) return;
@@ -110,18 +95,10 @@ namespace ProjectSystems
 		
 		private void SetWeapon(string id)
 		{
-			foreach (WeaponStorage.Weapon weapon in _weaponStorage.Weapons)
-			{
-				if (weapon.ID != id) continue;
-				
-				_currentWeapon = weapon;
-				_ammunition.Value = weapon.Ammunition;
-				return;
-			}
-
-			throw new NullReferenceException("No weapons found for this id");
+			WeaponStorage.Weapon currentWeapon = _weaponStorage.GetWeapon(id);
+			
+			_currentWeapon = currentWeapon;
+			_ammunition.Value = currentWeapon.Ammunition;
 		}
-
-		
 	}
 }
