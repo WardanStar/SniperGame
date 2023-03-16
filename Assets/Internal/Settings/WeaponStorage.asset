@@ -14,22 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weapons:
   - _id: SniperRifle
-    _shootingMode: 0
     _ammunition: 3
+    _quantityBulletAtShot: 1
     _speedAiming: 0
     _scoringRatio: 0.5
   - _id: SniperRifleElite
-    _shootingMode: 0
     _ammunition: 2
+    _quantityBulletAtShot: 1
     _speedAiming: 1
     _scoringRatio: 1
   - _id: Shotgun
-    _shootingMode: 1
     _ammunition: 3
+    _quantityBulletAtShot: 5
     _speedAiming: 0
     _scoringRatio: 0.1
   - _id: ShotgunElite
-    _shootingMode: 0
     _ammunition: 2
+    _quantityBulletAtShot: 5
     _speedAiming: 1
     _scoringRatio: 0.2

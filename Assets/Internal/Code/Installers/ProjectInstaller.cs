@@ -15,6 +15,7 @@ namespace Installers
 		[SerializeField] private LevelStorage _levelStorage;
 		[SerializeField] private WeaponStorage _weaponStorage;
 		[SerializeField] private GameSettings _gameSettings;
+		[SerializeField] private BulletsQueueStorage _bulletsQueueStorage;
 		
 		public override void InstallBindings()
 		{
@@ -45,6 +46,7 @@ namespace Installers
 			Container.BindInstance(_levelStorage).AsSingle();
 			Container.BindInstance(_weaponStorage).AsSingle();
 			Container.BindInstance(_gameSettings).AsSingle();
+			Container.BindInstance(_bulletsQueueStorage).AsSingle();
 		}
 	}
 }

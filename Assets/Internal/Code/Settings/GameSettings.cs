@@ -13,6 +13,7 @@ namespace Settings
 		public float RepulsiveForceAtCollision => _repulsiveForceAtCollision;
 
 		public float BulletSpeed => _bulletSpeed;
+		public float ShootingDistanceFromTheCamera => _shootingDistanceFromTheCamera;
 
 		public float SpeedCameraRotation => _speedCameraRotation;
 		public Vector3 IndentCameraWithBullet => _indentCameraWithBullet;
@@ -34,6 +35,7 @@ namespace Settings
 
 		[Header("BulletSettings")]
 		[SerializeField] private float _bulletSpeed;
+		[SerializeField] private float _shootingDistanceFromTheCamera;
 		
 		[Header("CameraSettings")]
 		[SerializeField] private float _speedCameraRotation;

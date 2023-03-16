@@ -22,14 +22,14 @@ namespace Settings
 		public class Weapon
 		{
 			public string ID => _id;
-			public ShootingMode ShootingMode => _shootingMode;
 			public int Ammunition => _ammunition;
+			public int QuantityBulletAtShot => _quantityBulletAtShot;
 			public SpeedAiming SpeedAiming => _speedAiming;
 			public float ScoringRatio => _scoringRatio;
 
 			[SerializeField] private string _id;
-			[SerializeField] private ShootingMode _shootingMode;
 			[SerializeField] private int _ammunition;
+			[SerializeField] private int _quantityBulletAtShot;
 			[SerializeField] private SpeedAiming _speedAiming;
 			[SerializeField, Range(0, 1)] private float _scoringRatio;
 		}

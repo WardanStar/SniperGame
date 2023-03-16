@@ -25,6 +25,8 @@ namespace ProjectSystems
 		private readonly WeaponSaveDataSystem _weaponSaveDataSystem;
 		private readonly SignalBus _signalBus;
 		private readonly GameSettings _gameSettings;
+		private readonly BulletsQueueStorage _bulletsQueueStorage;
+		private readonly LevelsDataControlSystem _levelsDataControlSystem;
 		private readonly ContextDisposable _contextDisposable;
 
 		private readonly ReactiveProperty<int> _ammunition = new(); 
@@ -39,6 +41,8 @@ namespace ProjectSystems
 			SceneResourcesStorage sceneResourcesStorage,
 			SignalBus signalBus,
 			GameSettings gameSettings,
+			BulletsQueueStorage bulletsQueueStorage,
+			LevelsDataControlSystem levelsDataControlSystem,
 			ContextDisposable contextDisposable
 		)
 		{
@@ -49,6 +53,8 @@ namespace ProjectSystems
 			_weaponSaveDataSystem = saveDataControlSystem.WeaponSaveDataSystem;
 			_signalBus = signalBus;
 			_gameSettings = gameSettings;
+			_bulletsQueueStorage = bulletsQueueStorage;
+			_levelsDataControlSystem = levelsDataControlSystem;
 			_contextDisposable = contextDisposable;
 		}
 		
@@ -59,19 +65,7 @@ namespace ProjectSystems
 			_joystick.OnStartAiming.Where(isStartAiming => isStartAiming).Subscribe(_ => _preparationToShoot = true)
 				.AddTo(_contextDisposable);
 			
-			_joystick.OnEndAiming.Where(isEndAiming => isEndAiming).Subscribe(_ =>
-				{
-					if (_preparationToShoot)
-					{
-						Transform cameraTransform = _sceneResourcesStorage.Camera.transform;
-						
-						_preparationToShoot = false;
-						IPoolObject bullet = _arm.PoolObjectGetter.GetPoolObject(ConstantKeys.BULLETS_COLLECTION_ID, ConstantKeys.DEFAULT_BULLET_ID,
-							cameraTransform.position + (2f *Vector3.forward), cameraTransform.rotation);
-						
-						_signalBus.Fire(new ShootSignal(){BulletTransform = bullet.GetTransform()});
-					}
-				}).AddTo(_contextDisposable);
+			_joystick.OnEndAiming.Where(isEndAiming => isEndAiming).Subscribe(_ => Shoot()).AddTo(_contextDisposable);
 		}
 
 		public WeaponStorage.Weapon GetCurrentWeapon() =>
@@ -90,6 +84,28 @@ namespace ProjectSystems
 				default:
 					throw new ArgumentOutOfRangeException();
 			}
+		}
+
+		private void Shoot()
+		{
+			if (!_preparationToShoot) return;
+			
+			Transform cameraTransform = _sceneResourcesStorage.Camera.transform;
+						
+			_preparationToShoot = false;
+			IPoolObject bullet = _arm.PoolObjectGetter.GetPoolObject(ConstantKeys.BULLETS_COLLECTION_ID, ConstantKeys.DEFAULT_BULLET_ID,
+				cameraTransform.position + (_gameSettings.ShootingDistanceFromTheCamera *Vector3.forward), cameraTransform.rotation);
+
+			for (int i = 1; i < _currentWeapon.QuantityBulletAtShot; i++)
+			{
+				_arm.PoolObjectGetter.GetPoolObject(ConstantKeys.BULLETS_COLLECTION_ID, ConstantKeys.DEFAULT_BULLET_ID,
+					cameraTransform.position + (_gameSettings.ShootingDistanceFromTheCamera * Vector3.forward) + 
+					(_bulletsQueueStorage.DirectionsBullet[i] *
+					 (((float)_levelsDataControlSystem.GetCurrentLevel().SizeTargetElement / 2) - bullet.GetTransform().localScale.x)),
+					cameraTransform.rotation);
+			}
+			
+			_signalBus.Fire(new ShootSignal(){BulletTransform = bullet.GetTransform()});
 		}
 		
 		private void SetWeapon(string id)
