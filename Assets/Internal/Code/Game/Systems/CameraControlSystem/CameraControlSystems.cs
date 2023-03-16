@@ -61,11 +61,20 @@ namespace Game
 					((targetSettings.TargetCubes.Length - 1 + 
 					  targetSettings.WeighCenterCube * 0.5f) * Vector3.up);
 				
+				var container = _cameraStateMachine.GetStateDataContainer<ReturnToStartPositionDataContainer>(
+					typeof(ReturnToStartPositionDataContainer));
+
+				container.StartPosition = sniperPosition;
+				container.StartRotation = _sceneResourcesStorage.Camera.transform.rotation.eulerAngles;
+				
 				_sceneResourcesStorage.Camera.transform.position = sniperPosition;
+				
+				_cameraStateMachine.SetState<IdleCameraState>();
 			}).AddTo(_contextDisposable);
 
 			_joystick.OnStartAiming.Where(isStartAiming => isStartAiming)
 				.Subscribe(_ => _cameraStateMachine.SetState<AimingCameraState>()).AddTo(_contextDisposable);
+			
 		}
 	}
 }

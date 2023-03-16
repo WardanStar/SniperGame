@@ -11,6 +11,10 @@ namespace Installers
 			Container.DeclareSignal<StartGameSignal>();
 			Container.DeclareSignal<ShootSignal>();
 			Container.DeclareSignal<PlayGameSignal>();
+			Container.DeclareSignal<CameraReturnToStartPositionSignal>();
+			Container.DeclareSignal<KillTargetElementSignal>();
+			Container.DeclareSignal<IncreaseScoreSignal>();
+			Container.DeclareSignal<NextLevelSignal>();
 		}
 	}
 }

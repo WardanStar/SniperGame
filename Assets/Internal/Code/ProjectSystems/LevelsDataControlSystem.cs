@@ -1,21 +1,40 @@
-﻿using Settings;
+﻿using Save;
+using Save.Levels;
+using Settings;
+using Signals;
+using UniRx;
+using Zenject;
 
 namespace ProjectSystems
 {
-	public class LevelsDataControlSystem
+	public class LevelsDataControlSystem : IInitializable
 	{
+		private readonly SignalBus _signalBus;
 		private readonly LevelStorage _levelStorage;
 		private int _indexLevel;
+		private readonly LevelsSaveDataSystem _levelsSaveDataSystem;
 
 		public LevelsDataControlSystem(
+			ISaveDataControlSystem saveDataControlSystem,
+			SignalBus signalBus,
 			LevelStorage levelStorage
 			)
 		{
+			_signalBus = signalBus;
 			_levelStorage = levelStorage;
+			_levelsSaveDataSystem = saveDataControlSystem.LevelsSaveDataSystem;
+			_indexLevel = _levelsSaveDataSystem.GetIndexCurrentLevel();
+		}
+		
+		public void Initialize()
+		{
+			_signalBus.GetStream<NextLevelSignal>().Subscribe(_ => NextLevel());
 		}
 		
 		public LevelStorage.Level GetCurrentLevel() =>
 			GetLevel(_indexLevel);
+
+		public int GetIndexCurrentLevel() => _indexLevel;
 
 		public int GetMaxTargetSize(bool height)
 		{
@@ -38,6 +57,7 @@ namespace ProjectSystems
 		private void NextLevel()
 		{
 			_indexLevel++;
+			_levelsSaveDataSystem.SetIndexCurrentLevel(_indexLevel);
 		}
 		
 		private LevelStorage.Level GetLevel(int indexLevel)

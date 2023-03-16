@@ -65,8 +65,6 @@ namespace ProjectSystems
 					{
 						Transform cameraTransform = _sceneResourcesStorage.Camera.transform;
 						
-						Debug.LogError(cameraTransform.position - _gameSettings.IndentCameraWithBullet);
-						
 						_preparationToShoot = false;
 						IPoolObject bullet = _arm.PoolObjectGetter.GetPoolObject(ConstantKeys.BULLETS_COLLECTION_ID, ConstantKeys.DEFAULT_BULLET_ID,
 							cameraTransform.position + (2f *Vector3.forward), cameraTransform.rotation);
@@ -76,11 +74,9 @@ namespace ProjectSystems
 				}).AddTo(_contextDisposable);
 		}
 
-		public void Shoot(Vector3 startPosition, Quaternion rotation)
-		{
-			
-		}
-
+		public WeaponStorage.Weapon GetCurrentWeapon() =>
+			_currentWeapon;
+		
 		public float GetSpeedAiming()
 		{
 			//TODO

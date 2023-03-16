@@ -9,6 +9,7 @@ namespace Game.Entities
 		public event Action<float> OnDamage;
 		public event Action<Material> OnChangeMaterial;
 		public event Action<int> OnChangeQuantityScoreByDestroy;
+		public event Action OnTargetDisable;
 		
 		public void SetMaterials(Material material) =>
 			OnChangeMaterial?.Invoke(material);
@@ -18,5 +19,8 @@ namespace Game.Entities
 
 		public void Damage(float damage) =>
 			OnDamage?.Invoke(damage);
+
+		public void OnDisable() =>
+			OnTargetDisable?.Invoke();
 	}
 }

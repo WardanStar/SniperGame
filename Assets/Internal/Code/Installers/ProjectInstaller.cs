@@ -31,8 +31,9 @@ namespace Installers
 		{
 			Container.BindInterfacesTo<Arm>().AsSingle().NonLazy();
 			Container.BindInterfacesTo<SaveDataControlSystem>().AsSingle().NonLazy();
-			Container.Bind<LevelsDataControlSystem>().AsSingle().NonLazy();
+			Container.BindInterfacesAndSelfTo<LevelsDataControlSystem>().AsSingle().NonLazy();
 			Container.Bind<QueueLoadingGame>().AsSingle().NonLazy();
+			Container.Bind<ProjectStateMachine>().AsSingle().NonLazy();
 		}
 
 		private void CommonInstall()

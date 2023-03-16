@@ -12,8 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b88e0844be34a278b8f5efe1d1fe55d, type: 3}
   m_Name: GameSettings
   m_EditorClassIdentifier: 
+  _quantityScoreOnVictory: 100
   _defaultWeaponID: 0
+  _repulsiveForceAtCollision: 800
+  _bulletSpeed: 15
   _speedCameraRotation: 5
   _indentCameraWithBullet: {x: -2, y: 2, z: 2}
   _cameraMovementTimeToTheTarget: 1
   _maxCameraSpeed: 100
+  _distanceToTheCameraTransitionToTheResultMode: 15
+  _timeToCameraLookResult: 2
+  _speedMoveReturnCameraOnStartPosition: 40
+  _speedRotateCameraOnStartRotation: 15

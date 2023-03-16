@@ -1,11 +1,25 @@
-﻿using Tools.WTools;
+﻿using Cysharp.Threading.Tasks;
+using Tools.WTools;
+using UI.Forms;
 
 namespace Game.CameraStateMachine
 {
 	public class IdleCameraState : State<ICameraState>
 	{
-		public IdleCameraState(StateMachine<ICameraState> stateMachine) : base(stateMachine)
+		private readonly UIFormControlSystem _uiFormControlSystem;
+
+		public IdleCameraState(
+			StateMachine<ICameraState> stateMachine,
+			UIFormControlSystem uiFormControlSystem
+			) : base(stateMachine)
 		{
+			_uiFormControlSystem = uiFormControlSystem;
 		}
+
+		public override void OnEnter() =>
+			_uiFormControlSystem.ShowForm<YouCanShootForm>().Forget();
+
+		public override void OnExit() =>
+			_uiFormControlSystem.HideForm<YouCanShootForm>().Forget();
 	}
 }

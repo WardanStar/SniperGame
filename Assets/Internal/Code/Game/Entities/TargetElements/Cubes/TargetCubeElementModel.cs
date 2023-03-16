@@ -1,4 +1,7 @@
-﻿using TMPro;
+﻿using Settings;
+using Signals;
+using TMPro;
+using UniRx;
 using UnityEngine;
 using Zenject;
 
@@ -7,30 +10,39 @@ namespace Game.Entities
 	public class TargetCubeElementModel : IInitializable
 	{
 		private readonly SignalBus _signalBus;
+		private readonly TargetCubeElementMono _targetCubeElementMono;
 		private readonly MeshRenderer _meshRenderer;
 		private readonly TMP_Text _scoreText;
+		private readonly Rigidbody _rigidbody;
 
 		private int _quantityScoreByDestroy;
+		private readonly float _repulsiveForceAtCollision;
 
 		public TargetCubeElementModel(
 			SignalBus signalBus,
+			GameSettings gameSettings,
 			TargetCubeElementMono targetCubeElementMono,
 			MeshRenderer meshRenderer,
-			TMP_Text scoreText
+			TMP_Text scoreText,
+			Rigidbody rigidbody
 			)
 		{
 			_signalBus = signalBus;
+			_repulsiveForceAtCollision = gameSettings.RepulsiveForceAtCollision;
+			_targetCubeElementMono = targetCubeElementMono;
 			_meshRenderer = meshRenderer;
 			_scoreText = scoreText;
+			_rigidbody = rigidbody;
 
 			targetCubeElementMono.OnDamage += OnDamage;
 			targetCubeElementMono.OnChangeMaterial += ChangeMaterial;
 			targetCubeElementMono.OnChangeQuantityScoreByDestroy += ChangeQuantityScoreBuDestroy;
+			targetCubeElementMono.OnTargetDisable += () => ChangeActivePhysics(false);
 		}
 
 		public void Initialize()
 		{
-			
+			_signalBus.GetStream<StartGameSignal>().Subscribe(_ => ChangeActivePhysics(true)).AddTo(_targetCubeElementMono);
 		}
 		
 		private void ChangeQuantityScoreBuDestroy(int score)
@@ -45,8 +57,14 @@ namespace Game.Entities
 
 		private void OnDamage(float damage)
 		{
-			
+			_rigidbody.AddForce(_repulsiveForceAtCollision * _targetCubeElementMono.transform.forward);
+			_signalBus.Fire(new KillTargetElementSignal(){QuantityScoreOnDestroy = _quantityScoreByDestroy});
 		}
 
+		private void ChangeActivePhysics(bool isActive)
+		{
+			_rigidbody.isKinematic = !isActive;
+			_rigidbody.useGravity = isActive;
+		}
 	}
 }

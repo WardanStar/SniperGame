@@ -72,6 +72,7 @@ MonoBehaviour:
   _meshRenderer: {fileID: 2754861065598028751}
   _scoreText: {fileID: 8502770203106707919}
   _targetCubeElementMono: {fileID: 2754861065598028746}
+  _targetCubeElementRigidbody: {fileID: 8284538206299861119}
 --- !u!114 &2754861065598028746
 MonoBehaviour:
   m_ObjectHideFlags: 0

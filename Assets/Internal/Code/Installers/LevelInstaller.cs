@@ -1,6 +1,7 @@
 ﻿using Game;
 using Game.CameraStateMachine;
 using Game.Data;
+using Game.Systems;
 using ProjectSystems;
 using Tools.DTools;
 using UnityEngine;
@@ -25,6 +26,9 @@ namespace Installers
 			Container.BindInterfacesAndSelfTo<CameraStateMachine>().AsSingle().NonLazy();
 			Container.BindInterfacesAndSelfTo<WeaponControlSystem>().AsSingle().NonLazy();
 			Container.BindInterfacesAndSelfTo<LevelStarter>().AsSingle().NonLazy();
+			Container.BindInterfacesAndSelfTo<LevelEndedSystem>().AsSingle().NonLazy();
+			Container.BindInterfacesAndSelfTo<ScoreCounter>().AsSingle().NonLazy();
+			Container.BindInterfacesAndSelfTo<EntityArbiter>().AsSingle().NonLazy();
 		}
 		
 		private void CommonInstall()

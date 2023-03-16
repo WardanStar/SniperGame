@@ -1,4 +1,5 @@
-﻿using Signals;
+﻿using ProjectSystems;
+using TMPro;
 using Tools.WTools;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,21 +10,23 @@ namespace UI.Forms
 	public class MenuForm : UIForm
 	{
 		[SerializeField] private Button _playGame;
-		private SignalBus _signalBus;
+		[SerializeField] private Button _changeWeaponButton;
+		[SerializeField] private TMP_Text _levelNumberText;
+		private LevelsDataControlSystem _levelsDataControlSystem;
 
 		[Inject]
-		public void Construct(SignalBus signalBus)
+		public void Construct(
+			ProjectStateMachine projectStateMachine,
+			LevelsDataControlSystem levelsDataControlSystem
+			)
 		{
-			_signalBus = signalBus;
+			_levelsDataControlSystem = levelsDataControlSystem;
+			_playGame.onClick.AddListener(projectStateMachine.SetState<GameProjectState>);
 		}
 
-		private void Start()
+		public override void ActionBeforeShow()
 		{
-			_playGame.onClick.AddListener(() =>
-			{
-				_signalBus.Fire<PlayGameSignal>();
-				Hide<MenuForm>(false);
-			});
+			_levelNumberText.text = $"Level {_levelsDataControlSystem.GetIndexCurrentLevel() + 1}";
 		}
 	}
 }

@@ -41,6 +41,8 @@ namespace Game
 		{
 			_arm.InitializeRoot();
 			
+			_arm.ReturnToPoolAllObject();
+			
 			_signalBus.Fire<PreparationGameSignal>();
 
 			Cursor.visible = false;
