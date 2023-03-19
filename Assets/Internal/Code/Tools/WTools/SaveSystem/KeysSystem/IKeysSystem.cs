@@ -1,8 +1,8 @@
 ﻿namespace Tools.WTools
 {
-	public interface IKeysSystem
-	{
-		public KeysAdmin KeysAdmin { get; }
-		public KeysInfo KeysInfo { get; }
-	}
+    public interface IKeysSystem
+    {
+        public KeysAdmin KeysAdmin { get; }
+        public KeysInfo KeysInfo { get; }
+    }
 }

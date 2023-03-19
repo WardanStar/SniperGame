@@ -8,27 +8,27 @@ using Zenject;
 
 namespace UI.Forms
 {
-	public class MenuForm : UIForm
-	{
-		[SerializeField] private Button _playGame;
-		[SerializeField] private Button _changeWeaponButton;
-		[SerializeField] private TMP_Text _levelNumberText;
-		private LevelsDataControlSystem _levelsDataControlSystem;
+    public class MenuForm : UIForm
+    {
+        [SerializeField] private Button _playGame;
+        [SerializeField] private Button _changeWeaponButton;
+        [SerializeField] private TMP_Text _levelNumberText;
+        private LevelsDataControlSystem _levelsDataControlSystem;
 
-		[Inject]
-		public void Construct(
-			ProjectStateMachine projectStateMachine,
-			LevelsDataControlSystem levelsDataControlSystem
-			)
-		{
-			_levelsDataControlSystem = levelsDataControlSystem;
-			_playGame.onClick.AddListener(projectStateMachine.SetState<GameProjectState>);
-			_changeWeaponButton.onClick.AddListener(() => CurrentUIFormControlSystem.ShowForm<ChangeWeaponForm>(true, 0.7f).Forget());
-		}
+        [Inject]
+        public void Construct(
+            ProjectStateMachine projectStateMachine,
+            LevelsDataControlSystem levelsDataControlSystem
+            )
+        {
+            _levelsDataControlSystem = levelsDataControlSystem;
+            _playGame.onClick.AddListener(projectStateMachine.SetState<GameProjectState>);
+            _changeWeaponButton.onClick.AddListener(() => CurrentUIFormControlSystem.ShowForm<ChangeWeaponForm>(true, 0.7f).Forget());
+        }
 
-		public override void ActionBeforeShow()
-		{
-			_levelNumberText.text = $"Level {_levelsDataControlSystem.GetIndexCurrentLevel() + 1}";
-		}
-	}
+        public override void ActionBeforeShow()
+        {
+            _levelNumberText.text = $"Level {_levelsDataControlSystem.GetIndexCurrentLevel() + 1}";
+        }
+    }
 }

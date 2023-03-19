@@ -1,7 +1,7 @@
 ﻿namespace Tools.WTools
 {
-	public class PoolObject : PoolObjectBase
-	{
-		
-	}
+    public class PoolObject : PoolObjectBase
+    {
+        
+    }
 }

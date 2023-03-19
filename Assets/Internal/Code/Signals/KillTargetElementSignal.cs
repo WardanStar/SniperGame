@@ -1,7 +1,7 @@
 ﻿namespace Signals
 {
-	public class KillTargetElementSignal
-	{
-		public float QuantityScoreOnDestroy;
-	}
+    public class KillTargetElementSignal
+    {
+        public float QuantityScoreOnDestroy;
+    }
 }

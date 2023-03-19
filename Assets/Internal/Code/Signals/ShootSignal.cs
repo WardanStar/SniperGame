@@ -2,8 +2,8 @@
 
 namespace Signals
 {
-	public class ShootSignal
-	{
-		public Transform BulletTransform;
-	}
+    public class ShootSignal
+    {
+        public Transform BulletTransform;
+    }
 }

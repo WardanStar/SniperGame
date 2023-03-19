@@ -1,7 +1,7 @@
 ﻿namespace Signals
 {
-	public class PlayGameSignal
-	{
-		
-	}
+    public class PlayGameSignal
+    {
+        
+    }
 }

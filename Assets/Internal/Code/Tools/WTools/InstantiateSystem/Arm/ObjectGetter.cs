@@ -1,7 +1,7 @@
 ﻿namespace Tools.WTools
 {
-	public class ObjectGetter
-	{
-		
-	}
+    public class ObjectGetter
+    {
+        
+    }
 }

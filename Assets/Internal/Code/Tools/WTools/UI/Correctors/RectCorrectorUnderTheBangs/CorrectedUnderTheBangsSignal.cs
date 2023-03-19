@@ -1,7 +1,7 @@
 ﻿namespace Tools.WTools
 {
-	public class CorrectedUnderTheBangsSignal
-	{
-		
-	}
+    public class CorrectedUnderTheBangsSignal
+    {
+        
+    }
 }

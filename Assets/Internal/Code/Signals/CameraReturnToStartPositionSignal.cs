@@ -1,7 +1,7 @@
 ﻿namespace Signals
 {
-	public class CameraReturnToStartPositionSignal
-	{
-		
-	}
+    public class CameraReturnToStartPositionSignal
+    {
+        
+    }
 }

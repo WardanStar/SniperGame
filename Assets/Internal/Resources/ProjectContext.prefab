@@ -78,4 +78,4 @@ MonoBehaviour:
   _levelStorage: {fileID: 11400000, guid: 4a92235c6f70854488075055c3256094, type: 2}
   _weaponStorage: {fileID: 11400000, guid: ee3c4598adaa3cf4e862aa095619af1d, type: 2}
   _gameSettings: {fileID: 11400000, guid: 5bff49545cccb3d428c37ba4ca42f12b, type: 2}
-  _bulletsQueueStorage: {fileID: 11400000, guid: a81d50d9223e73c4c8de95f0b68a2511, type: 2}
+  _directionsAppearanceBulletsAtMultiShot: {fileID: 11400000, guid: a81d50d9223e73c4c8de95f0b68a2511, type: 2}

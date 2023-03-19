@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: GameSettings
   m_EditorClassIdentifier: 
   _quantityScoreOnVictory: 100
+  _aimingTime: 3
   _defaultWeaponID: 0
-  _repulsiveForceAtCollision: 800
+  _repulsiveForceAtCollision: 2000
   _bulletSpeed: 15
-  _shootingDistanceFromTheCamera: 0
+  _shootingDistanceFromTheCamera: 2
   _speedCameraRotation: 5
   _indentCameraWithBullet: {x: -2, y: 2, z: 2}
   _cameraMovementTimeToTheTarget: 1
@@ -25,8 +26,7 @@ MonoBehaviour:
   _timeToCameraLookResult: 2
   _speedMoveReturnCameraOnStartPosition: 40
   _speedRotateCameraOnStartRotation: 15
-  _minValueBias: -180
-  _maxValueBias: 180
   _minTimeBias: 0.1
   _maxTimeBias: 0.5
-  _speedBias: 2
+  _minSpeedBias: 2
+  _maxSpeedBias: 4

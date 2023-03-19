@@ -2,8 +2,8 @@
 
 namespace Game.Entities
 {
-	public class UIAmmunitionIconMono : UIPoolObject
-	{
-		
-	}
+    public class UIAmmunitionIconMono : UIPoolObject
+    {
+        
+    }
 }

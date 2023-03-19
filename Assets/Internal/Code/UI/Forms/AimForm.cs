@@ -2,8 +2,8 @@
 
 namespace UI.Forms
 {
-	public class AimForm : UIForm
-	{
-		
-	}
+    public class AimForm : UIForm
+    {
+        
+    }
 }

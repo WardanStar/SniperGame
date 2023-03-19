@@ -2,9 +2,9 @@
 
 namespace Tools.WTools
 {
-	public class PhysicalPoolObject : PoolObjectWithCollider
-	{
-		public Rigidbody CommonRigidbody => _commonRigidbody;
-		[SerializeField] private Rigidbody _commonRigidbody;
-	}
+    public class PhysicalPoolObject : PoolObjectWithCollider
+    {
+        public Rigidbody CommonRigidbody => _commonRigidbody;
+        [SerializeField] private Rigidbody _commonRigidbody;
+    }
 }
