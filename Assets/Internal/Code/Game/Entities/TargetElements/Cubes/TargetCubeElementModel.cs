@@ -15,8 +15,9 @@ namespace Game.Entities
         private readonly TMP_Text _scoreText;
         private readonly Rigidbody _rigidbody;
 
-        private int _quantityScoreByDestroy;
         private readonly float _repulsiveForceAtCollision;
+        private int _quantityScoreByDestroy;
+        private bool _isDie;
 
         public TargetCubeElementModel(
             SignalBus signalBus,
@@ -37,7 +38,11 @@ namespace Game.Entities
             targetCubeElementMono.OnDamage += OnDamage;
             targetCubeElementMono.OnChangeMaterial += ChangeMaterial;
             targetCubeElementMono.OnChangeQuantityScoreByDestroy += ChangeQuantityScoreBuDestroy;
-            targetCubeElementMono.OnTargetDisable += () => ChangeActivePhysics(false);
+            targetCubeElementMono.OnTargetDisable += () =>
+            {
+                _isDie = false;
+                ChangeActivePhysics(false);
+            };
         }
 
         public void Initialize() =>
@@ -55,7 +60,12 @@ namespace Game.Entities
 
         private void OnDamage(float damage)
         {
-            _rigidbody.AddForce(_repulsiveForceAtCollision * _targetCubeElementMono.transform.forward);
+            if (!_isDie)
+            {
+                _rigidbody.AddForce(_repulsiveForceAtCollision * _targetCubeElementMono.transform.forward);
+                _isDie = true;
+            }
+            
             _signalBus.Fire(new KillTargetElementSignal(){QuantityScoreOnDestroy = _quantityScoreByDestroy});
         }
 

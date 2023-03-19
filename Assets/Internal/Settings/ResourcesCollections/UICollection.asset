@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: UICollection
   m_EditorClassIdentifier: 
   _storageObjectDataInResources:
-  - _idObject: AmmunitionIcon
-    _pathToResources: Prefabs/UI/AmmunitionEllement
+  - _idObject: SniperRifleAmmunitionIcon
+    _pathToResources: Prefabs/UI/SniperRifleAmmunitionIcon
+  - _idObject: ShootgunAmmunitionIcon
+    _pathToResources: Prefabs/UI/ShootgunAmmunitionIcon

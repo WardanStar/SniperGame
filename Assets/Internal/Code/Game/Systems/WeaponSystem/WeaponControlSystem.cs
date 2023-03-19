@@ -90,14 +90,18 @@ namespace ProjectSystems
         private void Shoot()
         {
             Transform cameraTransform = _sceneResourcesStorage.Camera.transform;
-                        
-            IPoolObject bullet = _arm.PoolObjectGetter.GetPoolObject(ConstantKeys.BULLETS_COLLECTION_ID, ConstantKeys.DEFAULT_BULLET_ID,
+
+            string bulletCollectionID = ConstantKeys.BULLETS_COLLECTION_ID;
+            string bulletId = _weaponInfo.GetCurrentWeapon().BulletID;
+            
+            IPoolObject bullet = _arm.PoolObjectGetter.GetPoolObject(bulletCollectionID, bulletId,
                 cameraTransform.position + (_gameSettings.ShootingDistanceFromTheCamera *Vector3.forward), cameraTransform.rotation);
 
             for (int i = 1; i < _weaponInfo.GetCurrentWeapon().QuantityBulletAtShot; i++)
             {
-                _arm.PoolObjectGetter.GetPoolObject(ConstantKeys.BULLETS_COLLECTION_ID, ConstantKeys.DEFAULT_BULLET_ID,
-                    cameraTransform.position + (_gameSettings.ShootingDistanceFromTheCamera * Vector3.forward) + 
+                _arm.PoolObjectGetter.GetPoolObject(bulletCollectionID, bulletId,
+                    cameraTransform.position +
+                    (_gameSettings.ShootingDistanceFromTheCamera * Vector3.forward) + 
                     (_directionsAppearanceBulletsAtMultiShot.DirectionsBullet[i] *
                      (((float)_levelsDataControlSystem.GetCurrentLevel().SizeTargetElement / 2) - bullet.GetTransform().localScale.x)),
                     cameraTransform.rotation);

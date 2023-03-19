@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: BulletsCollection
   m_EditorClassIdentifier: 
   _storageObjectDataInResources:
-  - _idObject: DefaultBullet
-    _pathToResources: Prefabs/DefaultBullet
+  - _idObject: SniperRifleBullet
+    _pathToResources: Prefabs/SniperRifleBullet
+  - _idObject: ShootgunBullet
+    _pathToResources: Prefabs/ShootgunBullet

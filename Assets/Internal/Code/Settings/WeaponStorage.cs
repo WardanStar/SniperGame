@@ -10,12 +10,16 @@ namespace Settings
         public class Weapon
         {
             public string ID => _id;
+            public string BulletID => _bulletID;
+            public string AmmunitionIconId => _ammunitionIconId;
             public int Ammunition => _ammunition;
             public int QuantityBulletAtShot => _quantityBulletAtShot;
             public float SightShiftSpeedWhenAiming => _sightShiftSpeedWhenAiming;
             public float ScoringRatio => _scoringRatio;
 
             [SerializeField] private string _id;
+            [SerializeField] private string _bulletID;
+            [SerializeField] private string _ammunitionIconId;
             [SerializeField] private int _ammunition;
             [SerializeField] private int _quantityBulletAtShot;
             [SerializeField] private float _sightShiftSpeedWhenAiming;

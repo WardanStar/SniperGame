@@ -19,6 +19,7 @@ namespace UI.Forms
 
         private readonly List<UIAmmunitionIconMono> _ammunitionIcons = new();
         private IArm _arm;
+        private WeaponInfo _weaponInfo;
 
 
         [Inject]
@@ -29,6 +30,7 @@ namespace UI.Forms
         )
         {
             _arm = arm;
+            _weaponInfo = weaponInfo;
             scoreCounter.Score.Subscribe(value => _scoreText.text = $"Score : {Math.Round(value, 1)}").AddTo(this);
             weaponInfo.Ammunition.Subscribe(ChangeAmmunition).AddTo(this);
         }
@@ -50,7 +52,7 @@ namespace UI.Forms
             for (int i = _ammunitionIcons.Count; i < value; i++)
             {
                 UIAmmunitionIconMono icon = _arm.UIPoolObjectGetter.GetComponentFromUIPoolObject<UIAmmunitionIconMono>(
-                    ConstantKeys.UI_COLLECTION_ID, ConstantKeys.AMMUNITION_ICON_ID, _ammunitionRoot);
+                    ConstantKeys.UI_COLLECTION_ID, _weaponInfo.GetCurrentWeapon().AmmunitionIconId, _ammunitionRoot);
                 
                 _ammunitionIcons.Add(icon);
             }
