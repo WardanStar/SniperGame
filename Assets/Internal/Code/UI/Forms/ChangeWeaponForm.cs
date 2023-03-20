@@ -1,5 +1,4 @@
 ﻿using System;
-using Additional.Enums;
 using Save;
 using Save.Weapon;
 using Settings;
@@ -16,11 +15,11 @@ namespace UI.Forms
         [Serializable]
         public class WeaponButton
         {
-            public string WeaponId => _weaponId.ToString();
+            public string WeaponId => _weaponId;
             public TMP_Text HeaderButton => _headerButton;
             public Button Button => _button;
 
-            [SerializeField] private WeaponId _weaponId;
+            [SerializeField] private string _weaponId;
             [SerializeField] private TMP_Text _headerButton;
             [SerializeField] private Button _button;
             [SerializeField] private Image _backLight;

@@ -1,5 +1,4 @@
-﻿using Additional.Enums;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Settings
 {
@@ -9,7 +8,7 @@ namespace Settings
         public int QuantityScoreOnVictory => _quantityScoreOnVictory;
         public float AimingTime => _aimingTime;
 
-        public string DefaultWeaponID => _defaultWeaponID.ToString();
+        public string PathToDefaultID => _pathToDefaultID;
 
         public float BulletSpeed => _bulletSpeed;
         public float ShootingDistanceFromTheCamera => _shootingDistanceFromTheCamera;
@@ -34,7 +33,7 @@ namespace Settings
         [SerializeField] private float _aimingTime;
         
         [Header("WeaponSettings")]
-        [SerializeField] private WeaponId _defaultWeaponID;
+        [SerializeField] private string _pathToDefaultID;
 
         [Header("BulletSettings")]
         [SerializeField] private float _bulletSpeed;

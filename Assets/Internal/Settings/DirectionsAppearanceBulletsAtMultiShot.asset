@@ -13,12 +13,21 @@ MonoBehaviour:
   m_Name: DirectionsAppearanceBulletsAtMultiShot
   m_EditorClassIdentifier: 
   _directionsBullet:
-  - {x: 0, y: 0, z: 0}
-  - {x: 1, y: 1, z: 0}
-  - {x: -1, y: 1, z: 0}
-  - {x: 1, y: -1, z: 0}
-  - {x: -1, y: -1, z: 0}
-  - {x: 0, y: 1, z: 0}
-  - {x: 0, y: -1, z: 0}
-  - {x: 1, y: 0, z: 0}
-  - {x: -1, y: 0, z: 0}
+  - _xValue: 0
+    _yValue: 0
+  - _xValue: 1
+    _yValue: 1
+  - _xValue: -1
+    _yValue: 1
+  - _xValue: 1
+    _yValue: -1
+  - _xValue: -1
+    _yValue: -1
+  - _xValue: 1
+    _yValue: 0
+  - _xValue: -1
+    _yValue: 0
+  - _xValue: 0
+    _yValue: 1
+  - _xValue: 0
+    _yValue: -1

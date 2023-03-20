@@ -102,8 +102,8 @@ namespace ProjectSystems
                 _arm.PoolObjectGetter.GetPoolObject(bulletCollectionID, bulletId,
                     cameraTransform.position +
                     (_gameSettings.ShootingDistanceFromTheCamera * Vector3.forward) + 
-                    (_directionsAppearanceBulletsAtMultiShot.DirectionsBullet[i] *
-                     (((float)_levelsDataControlSystem.GetCurrentLevel().SizeTargetElement / 2) - bullet.GetTransform().localScale.x)),
+                    new Vector3(_directionsAppearanceBulletsAtMultiShot.DirectionsBullet[i].XValue, _directionsAppearanceBulletsAtMultiShot.DirectionsBullet[i].YValue, 0f *
+                     ((float)_levelsDataControlSystem.GetCurrentLevel().SizeTargetElement / 2 - bullet.GetTransform().localScale.x)),
                     cameraTransform.rotation);
             }
 

@@ -293,7 +293,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 115.2, y: -30.8}
+  m_AnchoredPosition: {x: 115.19995, y: -30.800049}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &75895844
@@ -3834,7 +3834,7 @@ GameObject:
   - component: {fileID: 1062179340}
   - component: {fileID: 1062179339}
   m_Layer: 5
-  m_Name: ShootgunBackground
+  m_Name: ShotgunBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5278,7 +5278,7 @@ GameObject:
   - component: {fileID: 1377020887}
   - component: {fileID: 1377020886}
   m_Layer: 5
-  m_Name: ShootgunEliteBackLight
+  m_Name: ShotgunEliteBackLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6685,7 +6685,7 @@ GameObject:
   - component: {fileID: 1758877697}
   - component: {fileID: 1758877696}
   m_Layer: 5
-  m_Name: ShootgunEliteBackground
+  m_Name: ShotgunEliteBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6821,19 +6821,19 @@ MonoBehaviour:
   _closeButton: {fileID: 1219582522}
   _acceptButton: {fileID: 791586625}
   _weaponButtons:
-  - _weaponId: 0
+  - _weaponId: SniperRifle
     _headerButton: {fileID: 2134726492}
     _button: {fileID: 1954723013}
     _backLight: {fileID: 1358181062}
-  - _weaponId: 1
+  - _weaponId: SniperRifleElite
     _headerButton: {fileID: 1451605359}
     _button: {fileID: 294669180}
     _backLight: {fileID: 190042075}
-  - _weaponId: 2
+  - _weaponId: Shotgun
     _headerButton: {fileID: 1702641921}
     _button: {fileID: 1375302679}
     _backLight: {fileID: 1884144449}
-  - _weaponId: 3
+  - _weaponId: ShotgunElite
     _headerButton: {fileID: 1939317382}
     _button: {fileID: 724649121}
     _backLight: {fileID: 1377020886}
@@ -7195,7 +7195,7 @@ GameObject:
   - component: {fileID: 1884144450}
   - component: {fileID: 1884144449}
   m_Layer: 5
-  m_Name: ShootgunBackLight
+  m_Name: ShotgunBackLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

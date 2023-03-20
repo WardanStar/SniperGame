@@ -1,5 +1,4 @@
 ﻿using System;
-using Additional.Enums;
 using UnityEngine;
 
 namespace Settings
@@ -13,11 +12,11 @@ namespace Settings
             [Serializable]
             public class TargetCube
             {
-                public string PathToCube => _pathToCube.ToString();
-                public int QuantityScoreForDestroyingCube => _quantityScoreForDestroyingCube;
+                public string PathToCube => _pathToMaterialCube;
+                public int QuantityScoreForDefeatingCube => _quantityScoreForDefeatingCube;
 
-                [SerializeField] private TargetCubeElementId _pathToCube;
-                [SerializeField] private int _quantityScoreForDestroyingCube;
+                [SerializeField] private string _pathToMaterialCube;
+                [SerializeField] private int _quantityScoreForDefeatingCube;
             }
 
             public TargetCube[] TargetCubes => _targetCubes;

@@ -29,7 +29,7 @@ namespace Save
 
         public void Initialize()
         {
-            _keysSystem.KeysAdmin.SetKeyValue(ConstantKeys.SELECT_WEAPON_ID, _gameSettings.DefaultWeaponID, true);
+            _keysSystem.KeysAdmin.SetKeyValue(ConstantKeys.SELECT_WEAPON_ID, _gameSettings.PathToDefaultID, true);
         }
 
         public void DeleteAllKeys()

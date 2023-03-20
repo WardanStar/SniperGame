@@ -86,7 +86,7 @@ namespace Game
                 cubeElement.SetMaterials(_loader.LoadObject<Material>(
                     ConstantKeys.TARGET_CUBE_ELEMENT_MATERIALS_COLLECTION_ID, cubeSettings.PathToCube));
                 
-                cubeElement.SetQuantityScore(cubeSettings.QuantityScoreForDestroyingCube);
+                cubeElement.SetQuantityScore(cubeSettings.QuantityScoreForDefeatingCube);
                 
                 nextPosition = new Vector3(nextPosition.x + currentLevel.SizeTargetElement, nextPosition.y, nextPosition.z);
                 quantityElementInLine++;

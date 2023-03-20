@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _quantityScoreOnVictory: 100
   _aimingTime: 3
-  _defaultWeaponID: 0
+  _pathToDefaultID: SniperRifle
   _bulletSpeed: 15
   _shootingDistanceFromTheCamera: 2
   _repulsiveForceAtCollision: 2000
