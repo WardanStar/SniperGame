@@ -14,14 +14,14 @@ namespace Tools.WTools
         private State<T> _startState;
 
         private Dictionary<Type, State<T>> _states;
-        private Dictionary<Type, object> _statesDataConatiners;
+        private Dictionary<Type, object> _statesDataContainers;
 
-        protected void SetStates(Dictionary<Type, State<T>> states)
-        {
+        protected void SetStates(Dictionary<Type, State<T>> states) =>
             _states = states;
-        }
 
-
+        protected void SetDataContainers(Dictionary<Type, object> dataContainers) =>
+            _statesDataContainers = dataContainers;
+        
         public void SetState<TSetState>() where TSetState : State<T>
         {
             if (_states.TryGetValue(typeof(TSetState), out State<T> dictionaryState) is false)
@@ -30,7 +30,18 @@ namespace Tools.WTools
             if (ReferenceEquals(_currentState, null))
                 _startState = dictionaryState;
             else
+            {
+                if (_currentState == dictionaryState)
+                {
+#if STATE_MACHINE_DEBUGING
+                    Debug.LogError("Attempt to assign the currently active state.");
+#endif                   
+                    return;
+                }
+                
                 _currentState.OnExit();
+
+            }
 
             _currentState = dictionaryState;
             _currentState.OnEnter();
@@ -38,15 +49,10 @@ namespace Tools.WTools
             DisplayState(typeof(TSetState));
 #endif
         }
-
-        public void SetDataContainers(Dictionary<Type, object> dataContainers)
-        {
-            _statesDataConatiners = dataContainers;
-        }
         
         public TDataContainer GetStateDataContainer<TDataContainer>() where TDataContainer : StateDataContainer<T>
         {
-            if (_statesDataConatiners.TryGetValue(typeof(TDataContainer), out object obj) is false)
+            if (_statesDataContainers.TryGetValue(typeof(TDataContainer), out object obj) is false)
                 throw new NullReferenceException();
 
             if (obj is TDataContainer value)
@@ -83,7 +89,7 @@ namespace Tools.WTools
             string regexState = Regex.Replace(typeState.Name, "State", String.Empty);
             regexState = Regex.Replace(regexState, $"{nameStateMachine}", String.Empty);
             
-            Debug.LogError($"{nameStateMachine} : {regexState}");
+            Debug.LogError($"{nameStateMachine} : {regexState}.");
         }
 #endif
     }

@@ -34,9 +34,7 @@ namespace Game.CameraStateMachine
             
             SetStates(new Dictionary<Type, State<ICameraState>>()
             {
-                {typeof(IdleCameraState), new IdleCameraState(this,
-                        uiFormControlSystem)
-                },
+                {typeof(IdleCameraState), new IdleCameraState(this) },
                 
                 {typeof(AimingCameraState), new AimingCameraState(this,
                     joystick, weaponInfo,
@@ -58,6 +56,7 @@ namespace Game.CameraStateMachine
                 {typeof(ReturnToStartPositionCameraState), new ReturnToStartPositionCameraState(this,
                         signalBus,
                         returnToStartPositionDataContainer,
+                        uiFormControlSystem,
                         sceneResourcesStorage,
                         gameSettings)
                 }

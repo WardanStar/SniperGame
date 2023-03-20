@@ -23,6 +23,10 @@ namespace UI.Forms
             [SerializeField] private WeaponId _weaponId;
             [SerializeField] private TMP_Text _headerButton;
             [SerializeField] private Button _button;
+            [SerializeField] private Image _backLight;
+
+            public void SelectionWeapon(bool isSelection) =>
+                _backLight.gameObject.SetActive(isSelection);
         }
 
         [SerializeField] private TMP_Text _weaponHeaderText;
@@ -50,21 +54,28 @@ namespace UI.Forms
 
         private void Start()
         {
+            WeaponSaveDataSystem weaponSaveDataSystem = _saveDataControlSystem.WeaponSaveDataSystem;
+
+            string currentWeaponID = weaponSaveDataSystem.GetIDCurrentWeapon();
+            
             foreach (WeaponButton weaponButton in _weaponButtons)
             {
-                weaponButton.HeaderButton.text = weaponButton.WeaponId;
+                if (weaponButton.WeaponId == currentWeaponID)
+                    weaponButton.SelectionWeapon(true);
                 
                 weaponButton.Button.onClick.AddListener(() =>
                     ChangeSelectWeapon(weaponButton.WeaponId));
             }
 
-            WeaponSaveDataSystem weaponSaveDataSystem = _saveDataControlSystem.WeaponSaveDataSystem;
-            
             _closeButton.onClick.AddListener(() => Hide<ChangeWeaponForm>(true));
             
-            _acceptButton.onClick.AddListener(() => weaponSaveDataSystem.SetWeapon(_selectWeapon.ID));
+            _acceptButton.onClick.AddListener(() =>
+            {
+                ChangeSelectedButton(_selectWeapon.ID);
+                weaponSaveDataSystem.SetWeapon(_selectWeapon.ID);
+            });
             
-            ChangeSelectWeapon(weaponSaveDataSystem.GetIDCurrentWeapon());
+            ChangeSelectWeapon(currentWeaponID);
         }
 
         private void ChangeSelectWeapon(string idWeapon)
@@ -77,6 +88,20 @@ namespace UI.Forms
             _quantityBulletAtShotText.text = $"QuantityBulletAtShot : {currentWeapon.QuantityBulletAtShot}";
             _sightShiftSpeedWhenAimingText.text = $"SightShiftSpeedWhenAiming : {currentWeapon.SightShiftSpeedWhenAiming}";
             _scoringRatioText.text = $"_scoringRatio : {currentWeapon.ScoringRatio}";
+        }
+
+        private void ChangeSelectedButton(string weaponID)
+        {
+            foreach (WeaponButton weaponButton in _weaponButtons)
+            {
+                if (weaponButton.WeaponId == weaponID)
+                {
+                    weaponButton.SelectionWeapon(true);
+                    continue;
+                }
+                
+                weaponButton.SelectionWeapon(false);
+            }
         }
     }
 }

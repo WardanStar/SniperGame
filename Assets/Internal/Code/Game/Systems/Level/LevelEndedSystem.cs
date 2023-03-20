@@ -7,6 +7,7 @@ using Tools.DTools;
 using Tools.WTools;
 using UI.Forms;
 using UniRx;
+using UnityEngine;
 using Zenject;
 
 namespace Game.Systems
@@ -48,7 +49,7 @@ namespace Game.Systems
                 {
                     if (_weaponInfo.Ammunition.Value == 0)
                     {
-                        _uiFormControlSystem.ShowForm<LostForm>(true, 1f).Forget();
+                        EndedLevel(false);
                         return;
                     }
                     
@@ -56,10 +57,21 @@ namespace Game.Systems
                     return;
                 }
                 
-                _uiFormControlSystem.ShowForm<VictoryForms>(true, 1f).Forget();
+                EndedLevel(true);
                 _signalBus.Fire<NextLevelSignal>();
 
             }).AddTo(_contextDisposable);
+        }
+
+        private void EndedLevel(bool isWin)
+        {
+            Cursor.visible = true;
+            _uiFormControlSystem.HideForm<InscriptionBeforeAimingForm>().Forget();
+
+            if (isWin)
+                _uiFormControlSystem.ShowForm<VictoryForms>(true, 1f).Forget();
+            else
+                _uiFormControlSystem.ShowForm<LostForm>(true, 1f).Forget();
         }
     }
 }

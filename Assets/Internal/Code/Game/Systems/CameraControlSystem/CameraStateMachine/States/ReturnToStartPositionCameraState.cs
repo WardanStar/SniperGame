@@ -1,7 +1,9 @@
-﻿using Game.Data;
+﻿using Cysharp.Threading.Tasks;
+using Game.Data;
 using Settings;
 using Signals;
 using Tools.WTools;
+using UI.Forms;
 using UnityEngine;
 using Zenject;
 
@@ -12,6 +14,7 @@ namespace Game.CameraStateMachine
         private readonly SignalBus _signalBus;
         
         private readonly ReturnToStartPositionDataContainer _returnToStartPositionDataContainer;
+        private readonly UIFormControlSystem _uiFormControlSystem;
         private readonly Transform _cameraTransform;
         private readonly float _speedMoveReturnCameraToStartPosition;
         private readonly float _speedRotateCameraToStartRotation;
@@ -20,11 +23,13 @@ namespace Game.CameraStateMachine
             StateMachine<ICameraState> stateMachine,
             SignalBus signalBus,
             ReturnToStartPositionDataContainer returnToStartPositionDataContainer,
+            UIFormControlSystem uiFormControlSystem,
             SceneResourcesStorage sceneResourcesStorage,
             GameSettings gameSettings
             ) : base(stateMachine)
         {
             _returnToStartPositionDataContainer = returnToStartPositionDataContainer;
+            _uiFormControlSystem = uiFormControlSystem;
             _cameraTransform = sceneResourcesStorage.Camera.transform;
             _speedMoveReturnCameraToStartPosition = gameSettings.SpeedMoveReturnCameraOnStartPosition;
             _speedRotateCameraToStartRotation = gameSettings.SpeedRotateCameraOnStartRotation;
@@ -54,6 +59,7 @@ namespace Game.CameraStateMachine
 
         public override void OnExit()
         {
+            _uiFormControlSystem.ShowForm<InscriptionBeforeAimingForm>().Forget();
             _signalBus.Fire<CameraReturnToStartPositionSignal>();
         }
     }

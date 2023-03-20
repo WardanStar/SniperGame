@@ -69,6 +69,9 @@ namespace ProjectSystems
         
         private void NextLevel()
         {
+            if (_indexLevel > _levelStorage.Levels.Length - 1)
+                return;
+            
             _indexLevel++;
             _levelsSaveDataSystem.SetIndexCurrentLevel(_indexLevel);
         }

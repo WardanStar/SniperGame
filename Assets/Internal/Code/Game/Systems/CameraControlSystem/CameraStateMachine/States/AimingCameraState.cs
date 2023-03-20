@@ -53,6 +53,7 @@ namespace Game.CameraStateMachine
 
         public override void OnEnter()
         {
+            _uiFormControlSystem.HideForm<InscriptionBeforeAimingForm>().Forget();
             _uiFormControlSystem.ShowForm<AimForm>().Forget();
             ChangeBiasRotate();
         }
