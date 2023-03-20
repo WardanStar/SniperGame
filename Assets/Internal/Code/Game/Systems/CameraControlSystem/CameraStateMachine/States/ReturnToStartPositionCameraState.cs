@@ -19,6 +19,8 @@ namespace Game.CameraStateMachine
         private readonly float _speedMoveReturnCameraToStartPosition;
         private readonly float _speedRotateCameraToStartRotation;
 
+        private bool _stopRotation;
+
         public ReturnToStartPositionCameraState(
             StateMachine<ICameraState> stateMachine,
             SignalBus signalBus,
@@ -36,25 +38,41 @@ namespace Game.CameraStateMachine
             _signalBus = signalBus;
         }
 
+        public override void OnEnter() =>
+            _stopRotation = false;
+
         public override void Tick()
         {
             Transform cameraTransform = _cameraTransform;
-            var startPosition = _returnToStartPositionDataContainer.StartPosition;
+            Vector3 startPosition = _returnToStartPositionDataContainer.StartPosition;
+            Vector3 startRotation = _returnToStartPositionDataContainer.StartRotation;
+
+            startRotation.y += 360;
             
             Vector3 nextCameraPosition = Vector3.MoveTowards(_cameraTransform.position,
                 startPosition, _speedMoveReturnCameraToStartPosition * Time.deltaTime);
 
-            var nextCameraRotation = Vector3.MoveTowards(_cameraTransform.rotation.eulerAngles,
-                _returnToStartPositionDataContainer.StartRotation, _speedRotateCameraToStartRotation * Time.deltaTime);
+            Debug.LogError(_cameraTransform.eulerAngles);
+            Debug.LogError(startRotation);
+            
+            Vector3 nextCameraRotation = Vector3.MoveTowards(_cameraTransform.eulerAngles,
+                startRotation, _speedMoveReturnCameraToStartPosition * Time.deltaTime);
             
             if ((cameraTransform.position - startPosition).magnitude < 0.01f)
             {
                 StateMachine.SetState<IdleCameraState>();
                 return;
             }
+
+            if (nextCameraRotation.y + 360f - startRotation.y < 0.3f)
+            {
+                cameraTransform.eulerAngles = startRotation;
+                _stopRotation = true;
+            }
             
             cameraTransform.position = nextCameraPosition;
-            cameraTransform.eulerAngles = nextCameraRotation;
+            if (!_stopRotation)
+                cameraTransform.eulerAngles = nextCameraRotation;
         }
 
         public override void OnExit()

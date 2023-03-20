@@ -19,7 +19,7 @@ MonoBehaviour:
   _shootingDistanceFromTheCamera: 2
   _repulsiveForceAtCollision: 2000
   _speedCameraRotation: 5
-  _indentCameraWithBullet: {x: -2, y: 2, z: 2}
+  _indentCameraWithBullet: {x: 2, y: 2, z: 2}
   _cameraMovementTimeToTheTarget: 1
   _maxCameraSpeed: 100
   _distanceToTheCameraTransitionToTheResultMode: 15
