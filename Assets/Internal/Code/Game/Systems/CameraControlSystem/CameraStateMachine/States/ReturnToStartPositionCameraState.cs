@@ -52,9 +52,6 @@ namespace Game.CameraStateMachine
             Vector3 nextCameraPosition = Vector3.MoveTowards(_cameraTransform.position,
                 startPosition, _speedMoveReturnCameraToStartPosition * Time.deltaTime);
 
-            Debug.LogError(_cameraTransform.eulerAngles);
-            Debug.LogError(startRotation);
-            
             Vector3 nextCameraRotation = Vector3.MoveTowards(_cameraTransform.eulerAngles,
                 startRotation, _speedMoveReturnCameraToStartPosition * Time.deltaTime);
             
